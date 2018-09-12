@@ -71,8 +71,17 @@ endfunction
 
 " Add all the default extensions
 " Mappings for C and C++
-call <SID>AddAlternateExtensionMapping('h',"c,cpp,cxx,cc,CC")
-call <SID>AddAlternateExtensionMapping('H',"C,CPP,CXX,CC")
+if (!exists('g:alternatePreferCPP'))
+   let g:alternatePreferCPP = 0
+endif
+
+if (g:alternatePreferCPP == 0)
+  call <SID>AddAlternateExtensionMapping('h',"c,cpp,cxx,cc,CC")
+  call <SID>AddAlternateExtensionMapping('H',"C,CPP,CXX,CC")
+else
+  call <SID>AddAlternateExtensionMapping('h',"cpp,cxx,cc,CC,c")
+  call <SID>AddAlternateExtensionMapping('H',"CPP,CXX,CC,C")
+endif
 call <SID>AddAlternateExtensionMapping('hpp',"cpp,c")
 call <SID>AddAlternateExtensionMapping('HPP',"CPP,C")
 call <SID>AddAlternateExtensionMapping('c',"h")
